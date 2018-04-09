@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <semaphore.h>
-//#include <wiringPi.h>
+#include <wiringPi.h>
 #include <unistd.h>
 
 const int pin[5]={21,22,23,24,25};
