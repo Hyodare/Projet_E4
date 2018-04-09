@@ -49,11 +49,11 @@ void* reader(void* vargp)
 		//openfile(nom)
 		//lit file
 		*(file.mov)=(int*)calloc(5,sizeof(int));
-		(*(file.mov))[0]=0;
-		(*(file.mov))[1]=0;
-		(*(file.mov))[2]=0;
-		(*(file.mov))[3]=0;
-		(*(file.mov))[4]=0;
+		(*(file.mov))[0]=2400;
+		(*(file.mov))[1]=2400;
+		(*(file.mov))[2]=2400;
+		(*(file.mov))[3]=2400;
+		(*(file.mov))[4]=2400;
 		
 		sem_post(file.change2);
 		sem_wait(file.change);
