@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <semaphore.h>
-//#include <wiringPi.h>
+#include <wiringPi.h>
 #include <unistd.h>
 
 const int pin[5]={21,22,23,24,25};
@@ -25,15 +25,15 @@ void* servo(void *vargp)
 	int pinServ=pin[data.num];
 	int i;
 	printf("val ptr zero=%p\n",*(data.val));
-	//pinMode(pinServ,OUTPUT);
+	pinMode(pinServ,OUTPUT);
 	
 		while(1)
 		{
 			sem_wait(data.synch);
 			t=(*(data.val))[data.num];
-			//digitalWrite(pinServ,HIGH);
+			digitalWrite(pinServ,HIGH);
 			usleep(t);
-			//digitalWrite(pinServ,LOW);
+			digitalWrite(pinServ,LOW);
 			sem_getvalue(data.synch,&i);
 			printf("num=%d --- id =%d --- val= %d --- sem=%d\n",data.num,pinServ,t,i);
 			fflush(0);
@@ -64,24 +64,16 @@ void* manager(void* vargp)
 			printf("initialisation du pin %d --- i=%d\n",pin[i],i);
 		//usleep(10000);
 	}
-	
-	for(i=0;i<5;i++){
+	while(1)
+	{
 	sem_post(data.synch);
 	sem_post(data.synch);
 	sem_post(data.synch);
 	sem_post(data.synch);
 	sem_post(data.synch);
-	usleep(20000);
+	usleep(40000);
 	printf("\n");
 	*(data.val)=zero;
-	sem_post(data.synch);
-	sem_post(data.synch);
-	sem_post(data.synch);
-	sem_post(data.synch);
-	sem_post(data.synch);
-	usleep(20000);
-	printf("\n");
-	*(data.val)=pzero;
 	}
 	
 	
@@ -96,7 +88,7 @@ void* manager(void* vargp)
 int main(int argc, char* argv[])
 {
 	if(argc != 6)printf("erreur dans le nombre d'arguments");
-	//if(wiringPiSetupGpio()==-1)printf("rate setup gpio");
+	if(wiringPiSetupGpio()==-1)printf("rate setup gpio");
 	int i;
 	pthread_t id;
 	Data data;
