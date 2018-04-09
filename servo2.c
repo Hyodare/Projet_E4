@@ -52,7 +52,7 @@ void* reader(void* vargp)
 		*(file.mov)=(int*)calloc(5,sizeof(int));
 		(*(file.mov))[0]=0;
 		(*(file.mov))[1]=0;
-		(*(file.mov))[2]=0;
+		(*(file.mov))[2]=2400;
 		(*(file.mov))[3]=0;
 		(*(file.mov))[4]=0;
 		
