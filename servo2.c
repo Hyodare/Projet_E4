@@ -73,7 +73,7 @@ void* manager(void* vargp)
 	sem_post(data.synch);
 	usleep(40000);
 	printf("\n");
-	*(data.val)=zero;
+	*(data.val)=pzero;
 	}
 	
 	
