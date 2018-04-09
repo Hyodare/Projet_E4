@@ -33,11 +33,11 @@ void* servo(void *vargp)
 		{
 			sem_wait(mot.synch);
 			t=(*(mot.val))[mot.num];
-			sem_post(mot.synch);
+			printf("num=%d --- id =%d --- val= %d\n",mot.num,pinServ,t);
+			fflush(0);
 			digitalWrite(pinServ,HIGH);
 			usleep(t);
 			digitalWrite(pinServ,LOW);
-			printf("num=%d --- id =%d --- val= %d\n",mot.num,pinServ,t);			
 		}
 }
 
@@ -48,6 +48,7 @@ void* reader(void* vargp)
 	{
 		//openfile(nom)
 		//lit file
+		*(file.nbr)=0;
 		*(file.mov)=(int*)calloc(5,sizeof(int));
 		(*(file.mov))[0]=2400;
 		(*(file.mov))[1]=2400;
@@ -93,20 +94,17 @@ void* manager(void* vargp)
 	tmp=0;
 	max=*(file.nbr);
 	data=*(file.mov);
-	
+	*(val)=data+tmp;
 	while(1)
 	{
 		for(i=0;i<5;++i)
 			sem_post(mot[i].synch);
 		
-		for(i=0;i<5;++i)
-			sem_wait(mot[i].synch);
-		
 		if(tmp<max)
 			tmp++;
 		*(val)=data+tmp;
 		usleep(40000);
-		printf("\n");
+		printf("----------------------------------------------------\n");
 		//*(mot.val)=pzero;
 	}
 
