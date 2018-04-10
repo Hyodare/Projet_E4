@@ -19,11 +19,11 @@ int main()
 	pinMode(data1,INPUT);
 	pinMode(data2,INPUT);
 	digitalWrite(tx,HIGH);
-	while(digitalRead(rx)==LOW){}
+	while(digitalRead(rx)==LOW){printf("bloque low 1");}
 	digitalWrite(tx,LOW);
-	usleep(1000);
+	usleep(10000);
 	digitalWrite(tx,HIGH);
-	while(digitalRead(rx)==LOW){}
+	while(digitalRead(rx)==LOW){printf("bloque low 2");}
 	int tmp=1;
 	for(i=18;i<26;i++)
 	{
