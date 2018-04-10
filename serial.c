@@ -8,7 +8,7 @@ int main()
 	if(wiringPiSetupGpio()==-1)printf("rate setup gpio");
 	
 	int i;
-	for(i=18;i<27;i++)
+	for(i=18;i<26;i++)
 	{
 		pinMode(i,INPUT);
 	}
@@ -25,7 +25,7 @@ int main()
 	digitalWrite(tx,HIGH);
 	while(digitalRead(rx)==LOW){}
 	int tmp=1;
-	for(i=18;i<27;i++)
+	for(i=18;i<26;i++)
 	{
 		val+=digitalRead(i)*tmp;
 		tmp*=2;
