@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <semaphore.h>
-#include <wiringPi.h>
+//#include <wiringPi.h>
 #include <unistd.h>
 
 const int pin[5]={21,22,23,24,25};
@@ -27,7 +27,7 @@ void* servo(void *vargp)
 	Motor mot=*(Motor *)vargp;
 	int pinServ=pin[mot.num];
 	int i;
-	pinMode(pinServ,OUTPUT);
+	//pinMode(pinServ,OUTPUT);
 	
 		while(1)
 		{
@@ -35,29 +35,35 @@ void* servo(void *vargp)
 			t=(*(mot.val))[mot.num];
 			printf("num=%d --- id =%d --- val= %d\n",mot.num,pinServ,t);
 			fflush(0);
-			digitalWrite(pinServ,HIGH);
+			//digitalWrite(pinServ,HIGH);
 			usleep(t);
-			digitalWrite(pinServ,LOW);
+			//digitalWrite(pinServ,LOW);
 		}
 }
 
 void* reader(void* vargp)
 {
 	Fich file=*(Fich*)vargp;
+	FILE *fptr;
+	char nomcp[60];
+	int* data;
+	int i;
 	while(1)
 	{
 		//openfile(nom)
 		//lit file
-		*(file.nbr)=0;
-		*(file.mov)=(int*)calloc(5,sizeof(int));
-		(*(file.mov))[0]=0;
-		(*(file.mov))[1]=0;
-		(*(file.mov))[2]=2400;
-		(*(file.mov))[3]=0;
-		(*(file.mov))[4]=0;
-		
+		sprintf(nomcp,"mvt/%s.mvt",file.nom);
+		if((fptr=fopen(nomcp,"r")) !=NULL)
+		{
+			fscanf(fptr,"%d;\n",file.nbr);
+			*(file.mov)=(int*)malloc((*(file.nbr))*5*sizeof(int));
+			for(i=0;i<*(file.nbr);i++)
+				fscanf(fptr,"%d;%d;%d;%d;%d;\n",(*(file.mov)),(*(file.mov))+5*i+1,(*(file.mov))+5*i+2,(*(file.mov))+5*i+3,(*(file.mov))+5*i+4);
+	
+			
 		sem_post(file.change2);
 		sem_wait(file.change);
+		}
 		
 	}
 }
@@ -101,7 +107,7 @@ void* manager(void* vargp)
 			sem_post(mot[i].synch);
 		
 		if(tmp<max)
-			tmp++;
+			tmp+=5;
 		*(val)=data+tmp;
 		usleep(40000);
 		printf("----------------------------------------------------\n");
@@ -116,13 +122,13 @@ void* manager(void* vargp)
 int main(int argc, char* argv[])
 {
 	if(argc != 6)printf("erreur dans le nombre d'arguments");
-	if(wiringPiSetupGpio()==-1)printf("rate setup gpio");
+	//if(wiringPiSetupGpio()==-1)printf("rate setup gpio");
 	int i;
 	pthread_t id;
 	
 	Fich fichier;
 	fichier.nom=(char*)malloc(50*sizeof(char));
-	sprintf(fichier.nom,"init.mvmt");
+	sprintf(fichier.nom,"ferme");
 	fichier.change=(sem_t*)malloc(sizeof(sem_t));
 	sem_init(fichier.change,0,0);
 	fichier.change2=(sem_t*)malloc(sizeof(sem_t));
