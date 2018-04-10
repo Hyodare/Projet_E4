@@ -33,6 +33,7 @@ int main()
 	channel+=digitalRead(data1)*1;
 	channel+=digitalRead(data2)*2;
 	printf("channel = %d --- nombre = %d \n",channel,val);
+	digitalWrite(tx,LOW);
 	
 }
 	
