@@ -36,9 +36,9 @@ void setup() {
   pinMode(c1Pin, OUTPUT);
   pinMode(rxPin, INPUT);      
   pinMode(txPin, OUTPUT);
-  
+
   //init
-//  digitalWrite(rxPin, LOW);
+  //  digitalWrite(rxPin, LOW);
   digitalWrite(txPin, LOW);
   digitalWrite(d0Pin, LOW);
   digitalWrite(d1Pin, LOW);
@@ -53,6 +53,19 @@ void setup() {
   delay(1000);
   Serial.print("Setup OK\n");
 }
+// Read from analog:
+int sensorValue0;
+int sensorValue1;
+int sensorValue2;
+//covert to voltage
+float voltage0;
+float voltage1;
+float voltage2;
+
+
+int voltageResize;
+int dpinbit;
+int dpin;
 
 void loop(){
 
@@ -78,16 +91,41 @@ void loop(){
   else // System initialised
   {
     Serial.print("Jattends\n");
+    rxState = digitalRead(rxPin);
     if (rxState == HIGH) {
       Serial.print("Je demarre\n");
-      digitalWrite(d0Pin, HIGH); //Bit de poids faible
-      digitalWrite(d1Pin, LOW);
-      digitalWrite(d2Pin, LOW);
-      digitalWrite(d3Pin, LOW);
-      digitalWrite(d4Pin, HIGH);
-      digitalWrite(d5Pin, HIGH);
-      digitalWrite(d6Pin, LOW);
-      digitalWrite(d7Pin, HIGH);
+      // read the input on analog pin 0:
+      sensorValue0 = analogRead(A0);
+      sensorValue1 = analogRead(A1);
+      sensorValue2 = analogRead(A2);
+      // Convert the analog reading (which goes from 0 - 1023) to a voltage (0 - 5V):
+      voltage0 = sensorValue0 * (5.0 / 1023.0);
+      voltage1 = sensorValue1 * (5.0 / 1023.0);
+      voltage2 = sensorValue2 * (5.0 / 1023.0);
+
+
+
+      //convert voltage to pin
+      voltage0=3.33;//test
+      voltageResize= (int) voltage0*256/(5-0);//8 bits --> 256 and OV to 5V
+      for (dpin = 0; dpin < 8; dpin++) {
+        dpinbit = bitRead(voltageResize, dpin);//le rang du bit à lire, en partant de 0 pour le bit de poids faible (le plus à droite).
+          if (dpin == 0) { 
+            digitalWrite(dpin, LOW);
+          }
+          else {
+            digitalWrite(dpin, HIGH);
+          }
+      }
+
+      //      digitalWrite(d0Pin, HIGH); //Bit de poids faible
+      //      digitalWrite(d1Pin, LOW);
+      //      digitalWrite(d2Pin, LOW);
+      //      digitalWrite(d3Pin, LOW);
+      //      digitalWrite(d4Pin, HIGH);
+      //      digitalWrite(d5Pin, HIGH);
+      //      digitalWrite(d6Pin, LOW);
+      //      digitalWrite(d7Pin, HIGH);
       digitalWrite(c0Pin, LOW); //canal part 0
       digitalWrite(c1Pin, HIGH);//canal part 1
       delayMicroseconds(usleep);
@@ -105,10 +143,16 @@ void loop(){
 
         }
       }
+      acknow=0;
     }
 
   }
 }
+
+
+
+
+
 
 
 
