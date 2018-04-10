@@ -23,6 +23,7 @@ int main()
 	digitalWrite(tx,HIGH);
 	while(digitalRead(rx)==LOW){printf("bloque low 1");}
 	digitalWrite(tx,LOW);
+	scanf("/n");
 	usleep(10000);
 	digitalWrite(tx,HIGH);
 	while(digitalRead(rx)==LOW){printf("bloque low 2");}
