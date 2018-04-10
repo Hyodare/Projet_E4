@@ -6,17 +6,16 @@
 
 // constants won't change. They're used here to 
 // set pin numbers:
-const int txPin = 0;
-const int rxPin = 1;
+const int txPin = 1;
+const int rxPin = 0;
 const int d0Pin = 2; //data pin 0
 const int d1Pin = 3;
 const int d2Pin = 4;
 const int d3Pin = 5;
 const int d4Pin = 6;
 const int d5Pin = 7;
-const int d6Pin = 7;
-const int d7Pin = 8;
-const int d8Pin = 9; //data pin 8
+const int d6Pin = 8;
+const int d7Pin = 9;
 const int c0Pin = 10; //control pin0
 const int c1Pin = 11; //control pin1
 
@@ -35,7 +34,6 @@ void setup() {
   pinMode(d5Pin, OUTPUT);
   pinMode(d6Pin, OUTPUT);
   pinMode(d7Pin, OUTPUT);
-  pinMode(d8Pin, OUTPUT);
   pinMode(c0Pin, OUTPUT);
   pinMode(c1Pin, OUTPUT);
   pinMode(rxPin, INPUT);      
@@ -72,8 +70,7 @@ void loop(){
       digitalWrite(d4Pin, HIGH);
       digitalWrite(d5Pin, HIGH);
       digitalWrite(d6Pin, LOW);
-      digitalWrite(d7Pin, LOW);
-      digitalWrite(d8Pin, HIGH);
+      digitalWrite(d7Pin, HIGH);
       digitalWrite(c0Pin, LOW); //canal part 0
       digitalWrite(c1Pin, HIGH);//canal part 1
       delayMicroseconds(100);
