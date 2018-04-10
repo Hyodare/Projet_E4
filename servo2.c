@@ -61,7 +61,7 @@ void* reader(void* vargp)
 			i=0;
 			while(i<*(file.nbr))
 			{
-				fscanf(fptr,"%d;%d;%d;%d;%d;\n",(*(file.mov))+5*i,(*(file.mov))+5*i+1,(*(file.mov))+5*i+2,(*(file.mov))+5*i+3,(*(file.mov))+5*i+4);
+				fscanf(fptr,"--%d;%d;%d;%d;%d;\n",(*(file.mov))+5*i,(*(file.mov))+5*i+1,(*(file.mov))+5*i+2,(*(file.mov))+5*i+3,(*(file.mov))+5*i+4);
 				
 				printf("i=%d --- %d;%d;%d;%d;%d;\n",*((*(file.mov))),*((*(file.mov))+5*i+1),*((*(file.mov))+5*i+2),*((*(file.mov))+5*i+3),*((*(file.mov))+5*i+4));
 				fflush(0);
