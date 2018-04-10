@@ -59,7 +59,7 @@ void* reader(void* vargp)
 			*(file.mov)=(int*)malloc((*(file.nbr))*5*sizeof(int));
 			for(i=0;i<*(file.nbr);i++)
 				fscanf(fptr,"%d;%d;%d;%d;%d;\n",(*(file.mov)),(*(file.mov))+5*i+1,(*(file.mov))+5*i+2,(*(file.mov))+5*i+3,(*(file.mov))+5*i+4);
-			printf("%d;%d;%d;%d;%d;\n",(*(file.mov)),(*(file.mov))+5*i+1,(*(file.mov))+5*i+2,(*(file.mov))+5*i+3,(*(file.mov))+5*i+4);
+			printf("%d;%d;%d;%d;%d;\n",*(*(file.mov)),*(*(file.mov))+5*i+1,*(*(file.mov))+5*i+2,*(*(file.mov))+5*i+3,*(*(file.mov))+5*i+4);
 			
 		sem_post(file.change2);
 		sem_wait(file.change);
