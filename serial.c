@@ -18,6 +18,8 @@ int main()
 	pinMode(tx,OUTPUT);
 	pinMode(data1,INPUT);
 	pinMode(data2,INPUT);
+	digitalWrite(tx,LOW);
+	scanf();
 	digitalWrite(tx,HIGH);
 	while(digitalRead(rx)==LOW){printf("bloque low 1");}
 	digitalWrite(tx,LOW);
