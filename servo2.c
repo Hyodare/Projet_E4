@@ -175,6 +175,18 @@ int main(int argc, char* argv[])
 		usleep(1500000);
 		sprintf(fichier.nom,"fuck");
 		sem_post(fichier.change);
+		usleep(1500000);
+		sprintf(fichier.nom,"ouvre");
+		sem_post(fichier.change);
+		usleep(1500000);
+		sprintf(fichier.nom,"peace");
+		sem_post(fichier.change);
+		usleep(1500000);
+		sprintf(fichier.nom,"ouvre");
+		sem_post(fichier.change);
+		usleep(1500000);
+		sprintf(fichier.nom,"pouce");
+		sem_post(fichier.change);
 	}
 	usleep(5000000);
 	sprintf(fichier.nom,"ouvre");
