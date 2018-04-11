@@ -188,9 +188,11 @@ int main(int argc, char* argv[])
 		usleep(5000000);
 		sprintf(fichier.nom,"pouce");
 		sem_post(fichier.change);*/
-		
-		while((c=getchar())!="\n")
-		{(*(fichier.nom+i))=c}
+		i=-1;
+		do{
+			i++;
+			(*(fichier.nom+i))=getchar();
+		}while((*(fichier.nom+i))!="\n")
 		sem_post(fichier.change);
 	
 	}
