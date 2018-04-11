@@ -56,14 +56,14 @@ void* reader(void* vargp)
 		if((fptr=fopen(nomcp,"r")) !=NULL)
 		{
 			fscanf(fptr,"%d;\n",file.nbr);
-			printf("je vois %d elements",*(file.nbr));
+			printf("je vois %d elements\n",*(file.nbr));
 			*(file.mov)=(int*)malloc((*(file.nbr))*5*sizeof(int));
 			i=0;
 			while(i<*(file.nbr))
 			{
 				fscanf(fptr,"--%d;%d;%d;%d;%d;\n",(*(file.mov))+5*i,(*(file.mov))+5*i+1,(*(file.mov))+5*i+2,(*(file.mov))+5*i+3,(*(file.mov))+5*i+4);
 				
-				printf("i=%d --- %d;%d;%d;%d;%d;\n",i,*((*(file.mov))),*((*(file.mov))+5*i+1),*((*(file.mov))+5*i+2),*((*(file.mov))+5*i+3),*((*(file.mov))+5*i+4));
+				printf("i=%d --- %d;%d;%d;%d;%d;\n",i,*((*(file.mov))+5*i),*((*(file.mov))+5*i+1),*((*(file.mov))+5*i+2),*((*(file.mov))+5*i+3),*((*(file.mov))+5*i+4));
 				fflush(0);
 				i++;
 			}
@@ -116,6 +116,8 @@ void* manager(void* vargp)
 			max=*(file.nbr);
 			data=*(file.mov);
 			printf("je change de fichier");
+				printf("i=%d --- %d;%d;%d;%d;%d;\n",i,*((*(file.mov))),*((*(file.mov))+1),*((*(file.mov))+2),*((*(file.mov))+3),*((*(file.mov))+4));
+			
 		}
 		for(i=0;i<5;++i)
 			sem_post(mot[i].synch);
