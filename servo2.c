@@ -116,7 +116,7 @@ void* manager(void* vargp)
 			max=*(file.nbr);
 			data=*(file.mov);
 			printf("je change de fichier");
-				printf("i=%d --- %d;%d;%d;%d;%d;\n",i,*((*(data))),*((*(data))+1),*((*(data))+2),*((*(data))+3),*((*(data))+4));
+				printf("i=%d --- %d;%d;%d;%d;%d;\n",i,((*(data))),((*(data))+1),((*(data))+2),((*(data))+3),((*(data))+4));
 			
 		}
 		for(i=0;i<5;++i)
