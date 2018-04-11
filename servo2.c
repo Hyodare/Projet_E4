@@ -33,7 +33,7 @@ void* servo(void *vargp)
 		{
 			sem_wait(mot.synch);
 			t=(*(mot.val))[mot.num];
-			printf("num=%d --- id =%d --- val= %d\n",mot.num,pinServ,t);
+			//printf("num=%d --- id =%d --- val= %d\n",mot.num,pinServ,t);
 			fflush(0);
 			digitalWrite(pinServ,HIGH);
 			usleep(t);
@@ -123,7 +123,7 @@ void* manager(void* vargp)
 			tmp+=5;
 		*(val)=data+tmp;
 		usleep(40000);
-		printf("----------------------------------------------------\n");
+		//printf("----------------------------------------------------\n");
 		//*(mot.val)=pzero;
 	}
 
@@ -158,12 +158,16 @@ int main(int argc, char* argv[])
 	
 	usleep(2000000);
 	sprintf(fichier.nom,"ferme");
+	sem_post(fichier.change);
 	usleep(2000000);
 	sprintf(fichier.nom,"ouvre");
+	sem_post(fichier.change);
 	usleep(2000000);
 	sprintf(fichier.nom,"ferme");
+	sem_post(fichier.change);
 	usleep(2000000);
 	sprintf(fichier.nom,"ouvre");
+	sem_post(fichier.change);
 	
 	
 	pthread_join(id,NULL);
