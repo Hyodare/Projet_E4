@@ -21,7 +21,7 @@ int main()
 	digitalWrite(tx,LOW);
 	scanf("/n");
 	digitalWrite(tx,HIGH);
-	while(digitalRead(rx)==LOW){//printf("bloque low 1");
+	while(digitalRead(rx)==LOW){printf("bloque low 1");
 	}
 	digitalWrite(tx,LOW);
 	scanf("/n");
