@@ -144,11 +144,22 @@ int main(int argc, char* argv[])
 	if(pthread_create(&id,NULL,manager,(void*)&fichier)!=0)
 			printf("erreur a la creation de %d\n",i);
 	
-	while(1)
+	/*while(1)
 	{
 		scanf("%s",fichier.nom);
 		sem_post(fichier.change);
-	}
+	}*/
+	
+	usleep(2000000);
+	sprintf(fichier.nom,"ferme");
+	usleep(2000000);
+	sprintf(fichier.nom,"ouvre");
+	usleep(2000000);
+	sprintf(fichier.nom,"ferme");
+	usleep(2000000);
+	sprintf(fichier.nom,"ouvre");
+	
+	
 	pthread_join(id,NULL);
 }
 	
