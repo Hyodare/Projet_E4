@@ -1,4 +1,3 @@
-//#define OnThePi
 #include <unistd.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,24 +5,10 @@
 #define NBPOINT 100
 #define NBCAPTEUR 3
 
-#ifdef OnThePi
 #include <wiringPi.h>
-#endif
-int data(int channel, int val, int i);
 
 int main()
 {
-#ifdef OnThePi
-pinMode();
-#endif
-data(1, 128, 1);
-return 0;
-}
-
-
-#ifdef OnThePi
-int pinMode(void){
-
 	if(wiringPiSetupGpio()==-1)printf("rate setup gpio");
 	
 	int i;
@@ -50,6 +35,15 @@ int pinMode(void){
 	printf("fin init\n");
 
 	int tmp=1;
+	//begin init values management
+	int minimum=0, seuil1=100;
+
+	int values[NBCAPTEUR][NBPOINT] = {0};
+	int average[NBCAPTEUR][NBPOINT] = {0};
+	int hist[NBCAPTEUR][2] = {0};
+
+	int histoInitialise[NBCAPTEUR]={0};//variable qui permet de ne pas avoir hist<0
+	//end init values management
 	while(1)
 	{	val=0;
 		channel=0;
@@ -67,6 +61,40 @@ int pinMode(void){
 		channel+=digitalRead(data1)*1;
 		channel+=digitalRead(data2)*2;
 		printf("channel = %d --- nombre = %d --- ",channel,val);
+		///////////////////////////////////////////////////////////////////begin values management
+		//maj moyenne
+		average[channel][iManagement]=(average[channel][iManagement]*NBPOINT-values[channel][iManagement]+val-minimum)/NBPOINT;
+		//ajout dans l'histogramme
+		if (val-minimum>seuil1)
+		{
+		hist[channel][1]++;
+		}
+		else
+		{
+		hist[channel][0]++;
+		}
+
+		//supression de l'ancienne valeur
+		if (histoInitialise[channel]!=0)
+		{
+			if (values[channel][iManagement]>seuil1)
+			{
+			hist[channel][1]--;
+			}
+			else
+			{
+			hist[channel][0]--;
+			}
+		}
+		//maj tableau de valeur
+		values[channel][iManagement]=val-minimum;
+		//i=i+1
+		if (i+1>=NBPOINT)
+		{
+			histoInitialise[channel]=1;
+		}
+		i=(i++)%NBPOINT;
+		///////////////////////////////////////////////////////////////////end values management
 		digitalWrite(tx,LOW);
 		printf("fin \n");
 		while(digitalRead(rx)==HIGH){//printf("bloque low 1");
@@ -74,49 +102,4 @@ int pinMode(void){
 	}
 	
 }
-#endif	
-	
-int data(int channel, int val, int i)
-{
-	//init
-	int minimum=0, seuil1=100;
 
-	int values[NBCAPTEUR][NBPOINT] = {0};
-	int average[NBCAPTEUR][NBPOINT] = {0};
-	int hist[NBCAPTEUR][2] = {0};
-
-	int histoInitialise[NBCAPTEUR]={0};//variable qui permet de ne pas avoir hist<0
-	//maj moyenne
-	average[channel][i]=(average[channel][i]*NBPOINT-values[channel][i]+val-minimum)/NBPOINT;
-	//ajout dans l'histogramme
-	if (val-minimum>seuil1)
-	{
-	hist[channel][1]++;
-	}
-	else
-	{
-	hist[channel][0]++;
-	}
-
-	//supression de l'ancienne valeur
-	if (histoInitialise[channel]!=0)
-	{
-		if (values[channel][i]>seuil1)
-		{
-		hist[channel][1]--;
-		}
-		else
-		{
-		hist[channel][0]--;
-		}
-	}
-	//maj tableau de valeur
-	values[channel][i]=val-minimum;
-	//i=i+1
-	if (i+1>=NBPOINT)
-	{
-		histoInitialise[channel]=1;
-	}
-	i=(i++)%NBPOINT;
-
-}
