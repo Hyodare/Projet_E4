@@ -124,7 +124,10 @@ void* manager(void* vargp)
 		
 		if(tmp<max)
 			tmp+=5;
-		*(val)=data+tmp;
+		for(i=0;i<5;++i)
+		{
+			*(mot[i].val)=data+tmp;
+		}
 		usleep(40000);
 		//printf("-------------------------%p---------------------------\n",*(val));
 		//*(mot.val)=pzero;
