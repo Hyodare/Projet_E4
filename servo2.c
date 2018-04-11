@@ -192,7 +192,7 @@ int main(int argc, char* argv[])
 		do{
 			i++;
 			(*(fichier.nom+i))=getchar();
-		}while((*(fichier.nom+i))!="\n")
+		}while((*(fichier.nom+i))!='\n')
 		sem_post(fichier.change);
 	
 	}
