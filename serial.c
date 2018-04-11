@@ -25,7 +25,7 @@ int main()
 	}
 	digitalWrite(tx,LOW);
 	scanf("/n");
-	usleep(10000);
+	usleep(100000);
 	printf("fin init\n");
 	fflush(0);
 	while(1)
