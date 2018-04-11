@@ -21,22 +21,29 @@ int main()
 	digitalWrite(tx,LOW);
 	scanf("/n");
 	digitalWrite(tx,HIGH);
-	while(digitalRead(rx)==LOW){printf("bloque low 1");}
+	while(digitalRead(rx)==LOW){//printf("bloque low 1");
+	}
 	digitalWrite(tx,LOW);
 	scanf("/n");
 	usleep(10000);
-	digitalWrite(tx,HIGH);
-	while(digitalRead(rx)==LOW){printf("bloque low 2");}
-	int tmp=1;
-	for(i=18;i<26;i++)
+	while(1)
 	{
-		val+=digitalRead(i)*tmp;
-		tmp*=2;
+		digitalWrite(tx,HIGH);
+		while(digitalRead(rx)==LOW){//printf("bloque low 2");
+		}
+		int tmp=1;
+		for(i=18;i<26;i++)
+		{
+			val+=digitalRead(i)*tmp;
+			tmp*=2;
+		}
+		channel+=digitalRead(data1)*1;
+		channel+=digitalRead(data2)*2;
+		printf("channel = %d --- nombre = %d \n",channel,val);
+		digitalWrite(tx,LOW);
+		while(digitalRead(rx)==HIGH){//printf("bloque low 1");
+		}
 	}
-	channel+=digitalRead(data1)*1;
-	channel+=digitalRead(data2)*2;
-	printf("channel = %d --- nombre = %d \n",channel,val);
-	digitalWrite(tx,LOW);
 	
 }
 	
