@@ -110,6 +110,12 @@ void* manager(void* vargp)
 	*(val)=data+tmp;
 	while(1)
 	{
+		if(try_wait(file.change2))
+		{	tmp=0;
+			free(data);
+			max=*(file.nbr);
+			data=*(file.mov);
+		}
 		for(i=0;i<5;++i)
 			sem_post(mot[i].synch);
 		
