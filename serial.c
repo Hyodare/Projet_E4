@@ -29,13 +29,13 @@ int main()
 	scanf("/n");
 	usleep(100000);
 	printf("fin init\n");
-	fflush(0);
+
 	int tmp=1;
 	while(1)
 	{	val=0;
 		channel=0;
 		printf("debut --- ");
-		fflush(0);
+
 		digitalWrite(tx,HIGH);
 		while(digitalRead(rx)==LOW){//printf("bloque low 2");
 		}
@@ -48,10 +48,8 @@ int main()
 		channel+=digitalRead(data1)*1;
 		channel+=digitalRead(data2)*2;
 		printf("channel = %d --- nombre = %d --- ",channel,val);
-		fflush(0);
 		digitalWrite(tx,LOW);
 		printf("fin \n");
-		fflush(0);
 		while(digitalRead(rx)==HIGH){//printf("bloque low 1");
 		}
 	}
