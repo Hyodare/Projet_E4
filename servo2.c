@@ -161,7 +161,6 @@ int main(int argc, char* argv[])
 		scanf("%s",fichier.nom);
 		sem_post(fichier.change);
 	}*/
-	int i;
 	while(1)
 	{
 		/*usleep(5000000);
