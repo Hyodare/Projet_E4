@@ -1,20 +1,21 @@
 //#define OnThePi
 #include <unistd.h>
-
 #include <stdio.h>
 #include <stdlib.h>
+
+#define NBPOINT 100
 
 #ifdef OnThePi
 #include <wiringPi.h>
 #endif
-
+int data(int channel, int val, int i);
 
 int main()
 {
 #ifdef OnThePi
-int pinMode(void){
+pinMode();
 #endif
-
+data(1, 128, 1);
 return 0;
 }
 
@@ -74,8 +75,47 @@ int pinMode(void){
 }
 #endif	
 	
-int data(int channel, int val)
+int data(int channel, int val, int i)
 {
+	//init
+	int minimum=0, seuil1=100;
 
+	int values[NBPOINT] = {0};
+	int average[NBPOINT] = {0};
+	int hist[2] = {0};
+
+	int histoInitialise=0;//variable qui permet de ne pas avoir hist<0
+	//maj moyenne
+	average[i]=(average[i]*NBPOINT-values[i]+val-minimum)/NBPOINT;
+	//ajout dans l'histogramme
+	if (val-minimum>seuil1)
+	{
+	hist[1]++;
+	}
+	else
+	{
+	hist[0]++;
+	}
+
+	//supression de l'ancienne valeur
+	if (histoInitialise!=0)
+	{
+		if (values[i]>seuil1)
+		{
+		hist[1]--;
+		}
+		else
+		{
+		hist[0]--;
+		}
+	}
+	//maj tableau de valeur
+	values[i]=val-minimum;
+	//i=i+1
+	if (i+1>=NBPOINT)
+	{
+		histoInitialise=1;
+	}
+	i=(i++)%NBPOINT;
 
 }
