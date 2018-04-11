@@ -5,7 +5,7 @@
 #include <wiringPi.h>
 #include <unistd.h>
 
-const int pin[5]={21,22,23,24,25};
+const int pin[5]={4,5,6,26,27};
 typedef struct{
 	
 	int num;
@@ -33,7 +33,7 @@ void* servo(void *vargp)
 		{
 			sem_wait(mot.synch);
 			t=(*(mot.val))[mot.num];
-			printf("num=%d --- id =%d --- val= %d\n",mot.num,pinServ,t);
+			//printf("num=%d --- id =%d --- val= %d\n",mot.num,pinServ,t);
 			fflush(0);
 			digitalWrite(pinServ,HIGH);
 			usleep(t);
@@ -117,7 +117,7 @@ void* manager(void* vargp)
 			tmp+=5;
 		*(val)=data+tmp;
 		usleep(40000);
-		printf("----------------------------------------------------\n");
+		//printf("----------------------------------------------------\n");
 		//*(mot.val)=pzero;
 	}
 
@@ -144,6 +144,11 @@ int main(int argc, char* argv[])
 	if(pthread_create(&id,NULL,manager,(void*)&fichier)!=0)
 			printf("erreur a la creation de %d\n",i);
 	
+	while(1)
+	{
+		scanf("%s",fichier.nom);
+		sem_post(fichier.change);
+	}
 	pthread_join(id,NULL);
 }
 	
