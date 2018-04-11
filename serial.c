@@ -8,7 +8,7 @@ int main()
 	if(wiringPiSetupGpio()==-1)printf("rate setup gpio");
 	
 	int i;
-	for(i=18;i<26;i++)
+	for(i=18;i<=26;i++)
 	{
 		pinMode(i,INPUT);
 	}
