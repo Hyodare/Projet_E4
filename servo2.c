@@ -33,7 +33,7 @@ void* servo(void *vargp)
 		{
 			sem_wait(mot.synch);
 			t=(*(mot.val))[mot.num];
-			//printf("num=%d --- id =%d --- val= %d\n",mot.num,pinServ,t);
+			printf("num=%d --- id =%d --- val= %d\n",mot.num,pinServ,t);
 			fflush(0);
 			digitalWrite(pinServ,HIGH);
 			usleep(t);
@@ -156,16 +156,16 @@ int main(int argc, char* argv[])
 		sem_post(fichier.change);
 	}*/
 	
-	usleep(2000000);
+	usleep(10000000);
 	sprintf(fichier.nom,"ferme");
 	sem_post(fichier.change);
-	usleep(2000000);
+	usleep(10000000);
 	sprintf(fichier.nom,"ouvre");
 	sem_post(fichier.change);
-	usleep(2000000);
+	usleep(10000000);
 	sprintf(fichier.nom,"ferme");
 	sem_post(fichier.change);
-	usleep(2000000);
+	usleep(10000000);
 	sprintf(fichier.nom,"ouvre");
 	sem_post(fichier.change);
 	
