@@ -1,7 +1,7 @@
 
 #define usleep 10000
 
-#define ledON
+//#define ledON
 // constants won't change. They're used here to 
 // set pin numbers:
 const int txPin = 13;
@@ -19,7 +19,9 @@ const int led1Pin = A1;
 // variables will change:
 int i;
 int iAnalog;
-int valRead;
+int val1;
+int val2;
+int val3;
 
 void setup() {
 #ifdef ledON
@@ -73,22 +75,19 @@ void loop(){
     //Serial.print("Debut transmission - Attente de Rx Low\n");
     while(digitalRead(rxPin)==LOW){  ////Serial.print("Attends 3\n");
     }
-#ifdef ledON
-    digitalWrite(led0Pin, HIGH);
-    digitalWrite(led1Pin, LOW);
-#endif
-
     //Serial.print("Rx recu. Lecture d'une pin analogique\n");
-    
-    valRead = analogRead(dPin[iAnalog]);// read the input on analog pin
+
+    val1 = analogRead(aPin[0]);// read the input on analog pin
+    val2 = analogRead(aPin[1]);
+    val3 = analogRead(aPin[2]);
     for (i = 0; i < 8; i++) {   
-      digitalWrite(dPin[i], (valRead & ( 1 << (i+2) ))>>(i+2));
+      digitalWrite(dPin[i], (val1 & ( 1 << (i+2) ))>>(i+2));
       //Serial.print((valRead & ( 1 << (i+2) ))>>(i+2));
     }
     //Serial.println("");
-    digitalWrite(c0Pin, (iAnalog & ( 1 << 0 ))>>0);
+    digitalWrite(c0Pin, (0 & ( 1 << 0 ))>>0);
     //Serial.print((iAnalog & ( 1 << 0 ))>>0);
-    digitalWrite(c1Pin, (iAnalog & ( 1 << 1 ))>>1);
+    digitalWrite(c1Pin, (0 & ( 1 << 1 ))>>1);
     //Serial.print( (iAnalog & ( 1 << 1 ))>>1);
     //Serial.println("");
     digitalWrite(txPin, HIGH);// fin de setup les datas
@@ -96,14 +95,62 @@ void loop(){
     while(digitalRead(rxPin)==HIGH){  ////Serial.print("Attends 2\n");
     }
     digitalWrite(txPin, LOW);
-#ifdef ledON
-    digitalWrite(led0Pin, LOW);
-    digitalWrite(led1Pin, HIGH);
-#endif
+
+
+
+
+    while(digitalRead(rxPin)==LOW){  ////Serial.print("Attends 3\n");
+    }
+    //Serial.print("Rx recu. Lecture d'une pin analogique\n");
+
+    for (i = 0; i < 8; i++) {   
+      digitalWrite(dPin[i], (val2 & ( 1 << (i+2) ))>>(i+2));
+      //Serial.print((valRead & ( 1 << (i+2) ))>>(i+2));
+    }
+    //Serial.println("");
+    digitalWrite(c0Pin, (1 & ( 1 << 0 ))>>0);
+    //Serial.print((iAnalog & ( 1 << 0 ))>>0);
+    digitalWrite(c1Pin, (1 & ( 1 << 1 ))>>1);
+    //Serial.print( (iAnalog & ( 1 << 1 ))>>1);
+    //Serial.println("");
+    digitalWrite(txPin, HIGH);// fin de setup les datas
+    //Serial.print("Attente confirmation reception\n");
+    while(digitalRead(rxPin)==HIGH){  ////Serial.print("Attends 2\n");
+    }
+    digitalWrite(txPin, LOW);
+
+
+
+
+    while(digitalRead(rxPin)==LOW){  ////Serial.print("Attends 3\n");
+    }
+    //Serial.print("Rx recu. Lecture d'une pin analogique\n");
+
+    for (i = 0; i < 8; i++) {   
+      digitalWrite(dPin[i], (val3 & ( 1 << (i+2) ))>>(i+2));
+      //Serial.print((valRead & ( 1 << (i+2) ))>>(i+2));
+    }
+    //Serial.println("");
+    digitalWrite(c0Pin, (2 & ( 1 << 0 ))>>0);
+    //Serial.print((iAnalog & ( 1 << 0 ))>>0);
+    digitalWrite(c1Pin, (2 & ( 1 << 1 ))>>1);
+    //Serial.print( (iAnalog & ( 1 << 1 ))>>1);
+    //Serial.println("");
+    digitalWrite(txPin, HIGH);// fin de setup les datas
+    //Serial.print("Attente confirmation reception\n");
+    while(digitalRead(rxPin)==HIGH){  ////Serial.print("Attends 2\n");
+    }
+    digitalWrite(txPin, LOW);
+
+
+
+
+
     iAnalog=(iAnalog+1)%3;
     //Serial.print("Fin transmission\n");
   }
 }
+
 
 
 
