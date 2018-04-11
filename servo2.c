@@ -163,10 +163,10 @@ int main(int argc, char* argv[])
 	}*/
 	while(1)
 	{
-		usleep(5000000);
+		usleep(1500000);
 		sprintf(fichier.nom,"ouvre");
 		sem_post(fichier.change);
-		usleep(5000000);
+		usleep(1500000);
 		sprintf(fichier.nom,"ferme");
 		sem_post(fichier.change);
 	}
