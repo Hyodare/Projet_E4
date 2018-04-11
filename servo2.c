@@ -110,7 +110,7 @@ void* manager(void* vargp)
 	*(val)=data+tmp;
 	while(1)
 	{
-		if(try_wait(file.change2))
+		if(sem_trywait(file.change2))
 		{	tmp=0;
 			free(data);
 			max=*(file.nbr);
