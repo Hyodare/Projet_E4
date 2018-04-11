@@ -26,8 +26,9 @@ int main()
 	digitalWrite(tx,LOW);
 	scanf("/n");
 	usleep(10000);
+	printf("fin init\n");
 	while(1)
-	{
+	{	printf("debut --- ");
 		digitalWrite(tx,HIGH);
 		while(digitalRead(rx)==LOW){//printf("bloque low 2");
 		}
@@ -39,8 +40,9 @@ int main()
 		}
 		channel+=digitalRead(data1)*1;
 		channel+=digitalRead(data2)*2;
-		printf("channel = %d --- nombre = %d \n",channel,val);
+		printf("channel = %d --- nombre = %d --- ",channel,val);
 		digitalWrite(tx,LOW);
+		printf("fin \n");
 		while(digitalRead(rx)==HIGH){//printf("bloque low 1");
 		}
 	}
