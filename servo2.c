@@ -161,6 +161,7 @@ int main(int argc, char* argv[])
 		scanf("%s",fichier.nom);
 		sem_post(fichier.change);
 	}*/
+	char c;
 	while(1)
 	{
 		/*usleep(5000000);
@@ -188,8 +189,8 @@ int main(int argc, char* argv[])
 		sprintf(fichier.nom,"pouce");
 		sem_post(fichier.change);*/
 		
-		while(((*(fichier.nom+i))=getchar())!="\n")
-		{}
+		while((c=getchar())!="\n")
+		{(*(fichier.nom+i))=c}
 		sem_post(fichier.change);
 	
 	}
