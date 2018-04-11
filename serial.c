@@ -1,10 +1,27 @@
-#include <wiringPi.h>
+//#define OnThePi
+#include <unistd.h>
+
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+
+#ifdef OnThePi
+#include <wiringPi.h>
+#endif
+
 
 int main()
 {
+#ifdef OnThePi
+int pinMode(void){
+#endif
+
+return 0;
+}
+
+
+#ifdef OnThePi
+int pinMode(void){
+
 	if(wiringPiSetupGpio()==-1)printf("rate setup gpio");
 	
 	int i;
@@ -55,6 +72,10 @@ int main()
 	}
 	
 }
+#endif	
 	
-	
-	
+int data(int channel, int val)
+{
+
+
+}
