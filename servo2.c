@@ -188,7 +188,7 @@ int main(int argc, char* argv[])
 		sprintf(fichier.nom,"pouce");
 		sem_post(fichier.change);*/
 		
-		while(((*(fichier.nom+i))=getchar())!=EOF)
+		while(((*(fichier.nom+i))=getchar())!="\n")
 		{}
 		sem_post(fichier.change);
 	
