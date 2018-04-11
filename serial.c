@@ -33,7 +33,7 @@ int main()
 	int tmp=1;
 	while(1)
 	{	val=0;
-		channel==;
+		channel=0;
 		printf("debut --- ");
 		fflush(0);
 		digitalWrite(tx,HIGH);
