@@ -33,7 +33,7 @@ void* servo(void *vargp)
 		{
 			sem_wait(mot.synch);
 			t=*((*(mot.val))+mot.num);
-			printf("ptr=%p --- id =%d --- val= %d\n",(*(mot.val)),pinServ,t);
+			//printf("ptr=%p --- id =%d --- val= %d\n",(*(mot.val)),pinServ,t);
 			fflush(0);
 			digitalWrite(pinServ,HIGH);
 			usleep(t);
@@ -129,7 +129,7 @@ void* manager(void* vargp)
 			*(mot[i].val)=data+tmp;
 		}
 		usleep(40000);
-		printf("-------------------------%p---------------------------\n",*(val));
+		//printf("-------------------------%p---------------------------\n",*(val));
 		//*(mot.val)=pzero;
 	}
 
@@ -168,6 +168,7 @@ int main(int argc, char* argv[])
 		sem_post(fichier.change);
 		usleep(5000000);
 		sprintf(fichier.nom,"yolo");
+		sem_post(fichier.change);
 		usleep(5000000);
 		sprintf(fichier.nom,"ouvre");
 		sem_post(fichier.change);
@@ -193,38 +194,7 @@ int main(int argc, char* argv[])
 		sprintf(fichier.nom,"pouce");
 		sem_post(fichier.change);
 	
-	}
-	usleep(5000000);
-	sprintf(fichier.nom,"ouvre");
-	sem_post(fichier.change);
-	usleep(5000000);
-	sprintf(fichier.nom,"ferme");
-	sem_post(fichier.change);
-	usleep(5000000);
-	sprintf(fichier.nom,"ouvre");
-	sem_post(fichier.change);
-	usleep(5000000);
-	sprintf(fichier.nom,"ferme");
-	sem_post(fichier.change);
-	usleep(5000000);
-	sprintf(fichier.nom,"ouvre");
-	sem_post(fichier.change);
-	usleep(5000000);
-	sprintf(fichier.nom,"ferme");
-	sem_post(fichier.change);
-	usleep(5000000);
-	sprintf(fichier.nom,"ouvre");
-	sem_post(fichier.change);
-	usleep(5000000);
-	sprintf(fichier.nom,"ferme");
-	sem_post(fichier.change);
-	usleep(5000000);
-	sprintf(fichier.nom,"ouvre");
-	sem_post(fichier.change);
-	usleep(5000000);
-	sprintf(fichier.nom,"ferme");
-	sem_post(fichier.change);
-	
+	}	
 	
 	pthread_join(id,NULL);
 }
