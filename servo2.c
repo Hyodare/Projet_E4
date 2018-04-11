@@ -32,7 +32,7 @@ void* servo(void *vargp)
 		while(1)
 		{
 			sem_wait(mot.synch);
-			t=(*(mot.val))[mot.num];
+			t=*((*(mot.val))+mot.num);
 			printf("ptr=%p --- id =%d --- val= %d\n",(*(mot.val)),pinServ,t);
 			fflush(0);
 			digitalWrite(pinServ,HIGH);
