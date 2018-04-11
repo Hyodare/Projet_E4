@@ -167,6 +167,11 @@ int main(int argc, char* argv[])
 		sprintf(fichier.nom,"ouvre");
 		sem_post(fichier.change);
 		usleep(5000000);
+		sprintf(fichier.nom,"yolo");
+		usleep(5000000);
+		sprintf(fichier.nom,"ouvre");
+		sem_post(fichier.change);
+		usleep(5000000);
 		sprintf(fichier.nom,"spiderman");
 		sem_post(fichier.change);
 		usleep(5000000);
