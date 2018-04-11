@@ -162,17 +162,41 @@ int main(int argc, char* argv[])
 		sem_post(fichier.change);
 	}*/
 	
-	usleep(10000000);
-	sprintf(fichier.nom,"ferme");
-	sem_post(fichier.change);
-	usleep(10000000);
+	usleep(5000000);
 	sprintf(fichier.nom,"ouvre");
 	sem_post(fichier.change);
-	usleep(10000000);
+	usleep(5000000);
 	sprintf(fichier.nom,"ferme");
 	sem_post(fichier.change);
-	usleep(10000000);
+	usleep(5000000);
 	sprintf(fichier.nom,"ouvre");
+	sem_post(fichier.change);
+	usleep(5000000);
+	sprintf(fichier.nom,"ferme");
+	sem_post(fichier.change);
+	usleep(5000000);
+	sprintf(fichier.nom,"ouvre");
+	sem_post(fichier.change);
+	usleep(5000000);
+	sprintf(fichier.nom,"ferme");
+	sem_post(fichier.change);
+	usleep(5000000);
+	sprintf(fichier.nom,"ouvre");
+	sem_post(fichier.change);
+	usleep(5000000);
+	sprintf(fichier.nom,"ferme");
+	sem_post(fichier.change);
+	usleep(5000000);
+	sprintf(fichier.nom,"ouvre");
+	sem_post(fichier.change);
+	usleep(5000000);
+	sprintf(fichier.nom,"ferme");
+	sem_post(fichier.change);
+	usleep(5000000);
+	sprintf(fichier.nom,"ouvre");
+	sem_post(fichier.change);
+	usleep(5000000);
+	sprintf(fichier.nom,"ferme");
 	sem_post(fichier.change);
 	
 	
