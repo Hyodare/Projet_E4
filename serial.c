@@ -24,17 +24,22 @@ int main()
 	while(digitalRead(rx)==LOW){printf("bloque low 1");
 	}
 	digitalWrite(tx,LOW);
+	while(digitalRead(rx)==HIGH){printf("bloque low 2");
+	}
 	scanf("/n");
 	usleep(100000);
 	printf("fin init\n");
 	fflush(0);
+	int tmp=1;
 	while(1)
-	{	printf("debut --- ");
+	{	val=0;
+		channel==;
+		printf("debut --- ");
 		fflush(0);
 		digitalWrite(tx,HIGH);
 		while(digitalRead(rx)==LOW){//printf("bloque low 2");
 		}
-		int tmp=1;
+		tmp=1;
 		for(i=18;i<26;i++)
 		{
 			val+=digitalRead(i)*tmp;
