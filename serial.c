@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 #define NBPOINT 100
+#define NBCAPTEUR 3
 
 #ifdef OnThePi
 #include <wiringPi.h>
@@ -80,41 +81,41 @@ int data(int channel, int val, int i)
 	//init
 	int minimum=0, seuil1=100;
 
-	int values[NBPOINT] = {0};
-	int average[NBPOINT] = {0};
-	int hist[2] = {0};
+	int values[NBCAPTEUR][NBPOINT] = {0};
+	int average[NBCAPTEUR][NBPOINT] = {0};
+	int hist[NBCAPTEUR][2] = {0};
 
-	int histoInitialise=0;//variable qui permet de ne pas avoir hist<0
+	int histoInitialise[NBCAPTEUR]={0};//variable qui permet de ne pas avoir hist<0
 	//maj moyenne
-	average[i]=(average[i]*NBPOINT-values[i]+val-minimum)/NBPOINT;
+	average[channel][i]=(average[channel][i]*NBPOINT-values[channel][i]+val-minimum)/NBPOINT;
 	//ajout dans l'histogramme
 	if (val-minimum>seuil1)
 	{
-	hist[1]++;
+	hist[channel][1]++;
 	}
 	else
 	{
-	hist[0]++;
+	hist[channel][0]++;
 	}
 
 	//supression de l'ancienne valeur
-	if (histoInitialise!=0)
+	if (histoInitialise[channel]!=0)
 	{
-		if (values[i]>seuil1)
+		if (values[channel][i]>seuil1)
 		{
-		hist[1]--;
+		hist[channel][1]--;
 		}
 		else
 		{
-		hist[0]--;
+		hist[channel][0]--;
 		}
 	}
 	//maj tableau de valeur
-	values[i]=val-minimum;
+	values[channel][i]=val-minimum;
 	//i=i+1
 	if (i+1>=NBPOINT)
 	{
-		histoInitialise=1;
+		histoInitialise[channel]=1;
 	}
 	i=(i++)%NBPOINT;
 
