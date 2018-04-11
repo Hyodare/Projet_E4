@@ -112,7 +112,7 @@ void* manager(void* vargp)
 	{
 		if(sem_trywait(file.change2))
 		{	tmp=0;
-			free(data);
+			//free(data);
 			max=*(file.nbr);
 			data=*(file.mov);
 		}
