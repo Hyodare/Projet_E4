@@ -41,7 +41,7 @@ int main()
 	int values[NBCAPTEUR][NBPOINT] = {0};
 	int average[NBCAPTEUR][NBPOINT] = {0};
 	int hist[NBCAPTEUR][2] = {0};
-
+	int i2=0
 	int histoInitialise[NBCAPTEUR]={0};//variable qui permet de ne pas avoir hist<0
 	//end init values management
 	while(1)
@@ -94,7 +94,7 @@ int main()
 			histoInitialise[channel]=1;
 		}
 		i=(i++)%NBPOINT;
-		printf("%d=>%d --- moy=%d --- histo=%d,%d,%d --- \n",channel,val,average[channel][i2],histoInitialise[channel][0],histoInitialise[channel][1]);
+		printf("%d=>%d --- moy=%d --- histo=BAS=%d,HAUT=%d --- \n",channel,val,average[channel][i2],hist[channel][0],hist[channel][1]);
 		///////////////////////////////////////////////////////////////////end values management
 		digitalWrite(tx,LOW);
 		//printf("fin \n");
