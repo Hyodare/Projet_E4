@@ -40,9 +40,8 @@ int main()
 
 	int values[NBCAPTEUR][NBPOINT] = {0};
 	int average[NBCAPTEUR][NBPOINT] = {0};
-	int hist[NBCAPTEUR][2] = {0};
+	int hist[NBCAPTEUR][2] = {NBPOINT,0};
 	int i2=0
-	int histoInitialise[NBCAPTEUR]={0};//variable qui permet de ne pas avoir hist<0
 	//end init values management
 	while(1)
 	{	val=0;
@@ -65,35 +64,13 @@ int main()
 		//maj moyenne
 		average[channel][i2]=(average[channel][i2]*NBPOINT-values[channel][i2]+val-minimum)/NBPOINT;
 		//ajout dans l'histogramme
-		if (val-minimum>seuil1)
-		{
-		hist[channel][1]++;
-		}
-		else
-		{
-		hist[channel][0]++;
-		}
-
+		hist[channel][(val-minimum>seuil1)]++;
 		//supression de l'ancienne valeur
-		if (histoInitialise[channel]!=0)
-		{
-			if (values[channel][i2]>seuil1)
-			{
-			hist[channel][1]--;
-			}
-			else
-			{
-			hist[channel][0]--;
-			}
-		}
+		hist[channel][(values[channel][i2]>seuil1)]--;
 		//maj tableau de valeur
 		values[channel][i2]=val-minimum;
-		//i=i+1
-		if (i+1>=NBPOINT)
-		{
-			histoInitialise[channel]=1;
-		}
-		i=(i++)%NBPOINT;
+		//i2=i2+1
+		i2=(i2++)%NBPOINT;
 		printf("%d=>%d --- moy=%d --- histo=BAS=%d,HAUT=%d --- \n",channel,val,average[channel][i2],hist[channel][0],hist[channel][1]);
 		///////////////////////////////////////////////////////////////////end values management
 		digitalWrite(tx,LOW);
