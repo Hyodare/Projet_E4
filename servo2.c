@@ -63,8 +63,7 @@ void* reader(void* vargp)
 			{
 				fscanf(fptr,"--%d;%d;%d;%d;%d;\n",(*(file.mov))+5*i,(*(file.mov))+5*i+1,(*(file.mov))+5*i+2,(*(file.mov))+5*i+3,(*(file.mov))+5*i+4);
 				
-				printf("i=%d --- %d;%d;%d;%d;%d;\n",i,*((*(file.mov))+5*i),*((*(file.mov))+5*i+1),*((*(file.mov))+5*i+2),*((*(file.mov))+5*i+3),*((*(file.mov))+5*i+4));
-				fflush(0);
+				//printf("i=%d --- %d;%d;%d;%d;%d;\n",i,*((*(file.mov))+5*i),*((*(file.mov))+5*i+1),*((*(file.mov))+5*i+2),*((*(file.mov))+5*i+3),*((*(file.mov))+5*i+4));
 				i++;
 			}
 			
@@ -115,8 +114,8 @@ void* manager(void* vargp)
 			free(data);
 			max=*(file.nbr);
 			data=*(file.mov);
-			printf("je change de fichier");
-				printf("i=%d --- %d;%d;%d;%d;%d;\n",i,((*(data))),((*(data))+1),((*(data))+2),((*(data))+3),((*(data))+4));
+			//printf("je change de fichier");
+			//printf("i=%d --- %d;%d;%d;%d;%d;\n",i,((*(data))),((*(data))+1),((*(data))+2),((*(data))+3),((*(data))+4));
 			
 		}
 		for(i=0;i<5;++i)
