@@ -25,10 +25,10 @@ int main()
 	digitalWrite(tx,LOW);
 	scanf("/n");
 	digitalWrite(tx,HIGH);
-	while(digitalRead(rx)==LOW){printf("bloque low 1");
+	while(digitalRead(rx)==LOW){//printf("bloque low 1");
 	}
 	digitalWrite(tx,LOW);
-	while(digitalRead(rx)==HIGH){printf("bloque low 2");
+	while(digitalRead(rx)==HIGH){//printf("bloque low 2");
 	}
 	scanf("/n");
 	usleep(100000);
@@ -60,10 +60,10 @@ int main()
 		}
 		channel+=digitalRead(data1)*1;
 		channel+=digitalRead(data2)*2;
-		printf("channel = %d --- nombre = %d --- ",channel,val);
+		//printf("channel = %d --- nombre = %d --- ",channel,val);
 		///////////////////////////////////////////////////////////////////begin values management
 		//maj moyenne
-		average[channel][iManagement]=(average[channel][iManagement]*NBPOINT-values[channel][iManagement]+val-minimum)/NBPOINT;
+		average[channel][i2]=(average[channel][i2]*NBPOINT-values[channel][i2]+val-minimum)/NBPOINT;
 		//ajout dans l'histogramme
 		if (val-minimum>seuil1)
 		{
@@ -77,7 +77,7 @@ int main()
 		//supression de l'ancienne valeur
 		if (histoInitialise[channel]!=0)
 		{
-			if (values[channel][iManagement]>seuil1)
+			if (values[channel][i2]>seuil1)
 			{
 			hist[channel][1]--;
 			}
@@ -87,16 +87,17 @@ int main()
 			}
 		}
 		//maj tableau de valeur
-		values[channel][iManagement]=val-minimum;
+		values[channel][i2]=val-minimum;
 		//i=i+1
 		if (i+1>=NBPOINT)
 		{
 			histoInitialise[channel]=1;
 		}
 		i=(i++)%NBPOINT;
+		printf("%d=>%d --- moy=%d --- histo=%d,%d,%d --- \n",channel,val,average[channel][i2],histoInitialise[channel][0],histoInitialise[channel][1]);
 		///////////////////////////////////////////////////////////////////end values management
 		digitalWrite(tx,LOW);
-		printf("fin \n");
+		//printf("fin \n");
 		while(digitalRead(rx)==HIGH){//printf("bloque low 1");
 		}
 	}
