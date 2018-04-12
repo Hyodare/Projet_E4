@@ -2,7 +2,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#define NBPOINT 100
+#define NBMOY 10
+#define NBHIST 100
 #define NBCAPTEUR 3
 
 #include <wiringPi.h>
@@ -38,10 +39,12 @@ int main()
 	//begin init values management
 	int minimum=0, seuil1=100;
 
-	int values[NBCAPTEUR][NBPOINT] = {0};
-	int average[NBCAPTEUR][NBPOINT] = {0};
+	int values[NBCAPTEUR][NBMOY] = {0};
+	int sum[NBCAPTEUR][NBHIST] = {0};
 	int hist[NBCAPTEUR][2] = {NBPOINT,0};
+	int stmp;
 	int i2=0;
+	i=0;
 	//end init values management
 	while(1)
 	{	val=0;
@@ -62,13 +65,15 @@ int main()
 		//printf("channel = %d --- nombre = %d --- ",channel,val);
 		///////////////////////////////////////////////////////////////////begin values management
 		//maj moyenne
-		average[channel][i2]=(average[channel][i2]*NBPOINT-values[channel][i2]+val-minimum)/NBPOINT;
+		stmp=sum[channel][i2]-values[channel][i]+val-minimum;
 		//ajout dans l'histogramme
-		hist[channel][(val-minimum>seuil1)]++;
+		values[channel][i2]=val-minimum
+		hist[channel][seuilage(stmp)]++;
 		//supression de l'ancienne valeur
 		hist[channel][(values[channel][i2]>seuil1)]--;
 		//maj tableau de valeur
-		values[channel][i2]=val-minimum;
+		sum[channel][(i2+1)%NBHIST]
+		;
 		//i2=i2+1
 		i2=(i2++)%NBPOINT;
 		printf("%d=>%d --- moy=%d --- histo=BAS=%d,HAUT=%d --- \n",channel,val,average[channel][i2],hist[channel][0],hist[channel][1]);
