@@ -41,7 +41,7 @@ int main()
 	int values[NBCAPTEUR][NBPOINT] = {0};
 	int average[NBCAPTEUR][NBPOINT] = {0};
 	int hist[NBCAPTEUR][2] = {NBPOINT,0};
-	int i2=0
+	int i2=0;
 	//end init values management
 	while(1)
 	{	val=0;
