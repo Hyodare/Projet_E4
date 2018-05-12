@@ -5,7 +5,7 @@ const int pin[5]={4,5,6,26,27};
 int main(int argc, char* argv[])
 {	
 	if(argc != 6)printf("erreur dans le nombre d'arguments");
-	//if(wiringPiSetupGpio()==-1)printf("rate setup gpio");
+	if(wiringPiSetupGpio()==-1)printf("rate setup gpio");
 	pthread_t id;
 	
 	Fich fichier;
